@@ -1,4 +1,4 @@
-FILE   = Main.py
+FILE = Main.py
 
 all:
 	pyinstaller -F $(FILE)

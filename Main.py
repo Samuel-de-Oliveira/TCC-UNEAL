@@ -1,14 +1,19 @@
 import gi
-import config as cfg
+from config import translation
 
 gi.require_version('Gtk', '4.0')
 from gi.repository import GLib, Gtk
+
+# Config
+Translation: dict = translation.get_translation('pt-br')
 
 
 class MyWindow(Gtk.ApplicationWindow):
     def __init__(self, **kargs) -> None:
         super().__init__(**kargs, title='Hello, world!')
         self.set_default_size(400, 100)
+        self.set_resizable(False)
+        self.set_maximizable(False)
 
         self.num: int = 0   # Num
 
@@ -36,7 +41,9 @@ class MyWindow(Gtk.ApplicationWindow):
         self.main_box.append(self.button_box)
 
         # Num label
-        self.num_label = Gtk.Label(label=f'Value: {self.num}')
+        self.num_label = Gtk.Label(
+            label=f'{Translation["value_label"]} {self.num}'
+        )
         self.num_label.set_hexpand(True)
         self.label_box.append(self.num_label)
 
@@ -56,8 +63,7 @@ class MyWindow(Gtk.ApplicationWindow):
         if self.num < 0:
             self.num = 0
 
-        self.num_label.props.label = f'Value: {self.num}'
-        print(f'Value: {self.num}')
+        self.num_label.props.label = f'{Translation["value_label"]} {self.num}'
 
     def add_num(self, button) -> None:
         self.num += 1
@@ -76,4 +82,6 @@ def on_activate(app) -> None:
 if __name__ == '__main__':
     app = Gtk.Application(application_id='com.example.App')
     app.connect('activate', on_activate)
+
+    print(Translation['welcome'])
     app.run()
