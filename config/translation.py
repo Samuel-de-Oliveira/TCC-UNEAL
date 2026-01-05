@@ -9,7 +9,7 @@ else:
 
 
 def get_translation(language: str) -> dict:
-    with open(fr'{config_dir}/lang/{language}.json', 'r+') as file:
+    with open(rf'{config_dir}/lang/{language}.json', 'r+') as file:
         translation: dict = json.load(file)
 
     return translation

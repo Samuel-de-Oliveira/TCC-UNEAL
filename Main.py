@@ -2,10 +2,19 @@ import gi
 from config import translation
 
 gi.require_version('Gtk', '4.0')
-from gi.repository import GLib, Gtk
+from gi.repository import GLib, Gtk, Gdk
 
 # Config
 Translation: dict = translation.get_translation('pt-br')
+
+# Window style
+css_provider = Gtk.CssProvider()
+css_provider.load_from_path('style.css')
+Gtk.StyleContext.add_provider_for_display(
+    Gdk.Display.get_default(),
+    css_provider,
+    Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
+)
 
 
 class MyWindow(Gtk.ApplicationWindow):
@@ -13,7 +22,6 @@ class MyWindow(Gtk.ApplicationWindow):
         super().__init__(**kargs, title='Hello, world!')
         self.set_default_size(400, 100)
         self.set_resizable(False)
-        self.set_maximizable(False)
 
         self.num: int = 0   # Num
 
