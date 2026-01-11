@@ -2,3 +2,18 @@ window {
   background-color: #1f1f1f;
   color: white;
 }
+
+button {
+  background: #222222;
+  color: white;
+  min-height: 50px;
+  transition: all 0.2s ease;
+} button:hover {
+  background: white;
+  color: black;
+  transition: all 0.2s ease;
+} button:active {
+  color: white;
+  background: #222222;
+  transition: all 0.05s ease;
+}

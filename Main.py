@@ -1,6 +1,10 @@
 import gi
-from config import translation
 
+# Software config and core
+from config import translation
+from core import *
+
+# Gtk package
 gi.require_version('Gtk', '4.0')
 from gi.repository import GLib, Gtk, Gdk
 
@@ -19,13 +23,14 @@ Gtk.StyleContext.add_provider_for_display(
 
 class MyWindow(Gtk.ApplicationWindow):
     def __init__(self, **kargs) -> None:
+        ## Window Config ##
         super().__init__(**kargs, title='Hello, world!')
         self.set_default_size(400, 100)
         self.set_resizable(False)
 
         self.num: int = 0   # Num
 
-        ## Boxes
+        ## Boxes ##
         # Main box
         self.main_box = Gtk.Box(
             orientation=Gtk.Orientation.VERTICAL, spacing=10
@@ -67,7 +72,7 @@ class MyWindow(Gtk.ApplicationWindow):
         self.button_purge.set_hexpand(True)
         self.button_box.append(self.button_purge)
 
-    def print_num(self) -> None:
+    def update_label(self) -> None:
         if self.num < 0:
             self.num = 0
 
@@ -75,11 +80,11 @@ class MyWindow(Gtk.ApplicationWindow):
 
     def add_num(self, button) -> None:
         self.num += 1
-        self.print_num()
+        self.update_label()
 
     def purge_num(self, button) -> None:
         self.num -= 1
-        self.print_num()
+        self.update_label()
 
 
 def on_activate(app) -> None:

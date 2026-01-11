@@ -17,3 +17,12 @@ class Matrix:
             return False
         else:
             return True
+
+    def sum(self, list_of_matrixes: list, **kargs: dict) -> None:
+        pass
+
+    def det(self) -> float:
+        return math.pi
+
+    def trace(self) -> float:
+        return math.pi
